@@ -4,6 +4,9 @@
 #include <ctime>
 #include <format>
 #include <print>
+#include <boost/predef.h>
+#include <algorithm>
+#include <iterator>
 
 #pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS
 
@@ -22,6 +25,22 @@ int main() //Note to self always, always, have variables defined INSIDE of int m
 	int anothernum{ 45 };
 	int inputx{};
 	int inputy{};
+
+
+	if (BOOST_OS_WINDOWS)
+		cout << "This is a Windows Machine" << endl;
+
+
+	if (BOOST_OS_LINUX)
+		cout << "This is a Linux machine" << endl;
+
+	if (BOOST_OS_MACOS)
+		cout << "This is a macOS machine" << endl; 
+
+	if (BOOST_OS_IRIX)
+		cout << "It's a Unix System I know this!" << endl;
+
+
 
 
 	//Begin writing clock function
@@ -44,6 +63,18 @@ int main() //Note to self always, always, have variables defined INSIDE of int m
 	cin >> inputx >> inputy;
 	cout << "You've entered: " << inputx << " and also : " << inputy << endl;
 
+	//Begin std::sort notes
+	int array[]{ 30,40,50,60,70 };
+
+	std::sort(std::begin(array), std::end(array));
+
+	for (int i{ 0 }; i < static_cast<int>(std::size(array)); ++i)
+		std::cout << array[i] << ' ';
+
+	std::cout << '\n';
+
+	return 0;
+	
 	//Begin Listing operator and their size
 	cout << "All this does is list out what bytes are in a operator." << endl;
 	cout << "Since all machines are different. All your bytes will vary." << endl;
@@ -58,7 +89,7 @@ int main() //Note to self always, always, have variables defined INSIDE of int m
 	cout << setw(16) << "double" << sizeof(double) << "bytes\n";
 	cout << setw(16) << "long double" << sizeof(long double) << "bytes\n";
 	//End listing operator and their byte size
-
+	
 
 	auto end = chrono::system_clock::now(); // Tells the stopwatch to stop and outputs it at the end of execution. 
 	//Below just tells the machine to display time with date and how long the code ran.
